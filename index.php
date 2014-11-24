@@ -4,10 +4,10 @@
 
 	function parsePageSignedRequest() {
 
-	if (isset($_REQUEST['signed_request'])) {
+	if (isset($signed_request)) {
 		$encoded_sig = null;
 		$payload = null;
-		list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
+		list($encoded_sig, $payload) = explode('.', $signed_request, 2);
 		$data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
 		return $data;
 	}
