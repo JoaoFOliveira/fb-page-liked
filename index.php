@@ -1,6 +1,6 @@
 <?php 
 
-	$signed_request = $_REQUEST['signed_request'];
+	$signed_request = filter_input(INPUT_GET, 'signed_request');
 
 	function parsePageSignedRequest() {
 
@@ -8,7 +8,6 @@
 		$encoded_sig = null;
 		$payload = null;
 		list($encoded_sig, $payload) = explode('.', $_REQUEST['signed_request'], 2);
-		$sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
 		$data = json_decode(base64_decode(strtr($payload, '-_', '+/'), true));
 		return $data;
 	}
